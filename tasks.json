@@ -1,9 +1,33 @@
 [
   {
     "id": 2,
-    "description": "Do Homework",
-    "status": "to-do",
+    "description": "Do math homework",
+    "status": "done",
     "createdAt": "2026-02-28T23:12:01.550Z",
-    "updatedAt": "2026-02-28T23:12:01.552Z"
+    "updatedAt": "2026-03-03T07:20:11.306Z"
+  },
+  {
+    "id": 3,
+    "description": "new task",
+    "status": "to-do",
+    "priority": "medium",
+    "createdAt": "2026-03-03T07:19:09.769Z",
+    "updatedAt": "2026-03-03T07:19:09.771Z"
+  },
+  {
+    "id": 4,
+    "description": "Exam preparation",
+    "status": "to-do",
+    "priority": "high",
+    "createdAt": "2026-03-03T07:30:33.294Z",
+    "updatedAt": "2026-03-03T07:30:33.296Z"
+  },
+  {
+    "id": 5,
+    "description": "Watch movie",
+    "status": "to-do",
+    "priority": "low",
+    "createdAt": "2026-03-03T07:31:03.300Z",
+    "updatedAt": "2026-03-03T07:31:03.301Z"
   }
 ]

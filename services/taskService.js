@@ -76,9 +76,12 @@ export function listTasks(filter) {
   }
 
   tasksToDisplay.forEach(task => {
-    console.log(
-      `ID: ${task.id}, Description: ${task.description}, Status: ${task.status}, Priority: ${task.priority || 'medium'}, Created: ${task.createdAt}, Updated: ${task.updatedAt}`
-    );
+    console.log(`ID: ${task.id}`);
+    console.log(`Description: ${task.description}`);
+    console.log(`Status: ${task.status}`);
+    console.log(`Priority: ${task.priority || 'medium'}`);
+    console.log(`Created: ${task.createdAt}`);
+    console.log(`Updated: ${task.updatedAt}`);
   });
 }
 
@@ -101,9 +104,12 @@ export function searchTasks({ priority, date }) {
   }
 
   results.forEach(task => {
-    console.log(
-      `ID: ${task.id}, Description: ${task.description}, Status: ${task.status}, Priority: ${task.priority || 'medium'}, Created: ${task.createdAt}, Updated: ${task.updatedAt}`
-    );
+    console.log(`ID: ${task.id}`);
+    console.log(`Description: ${task.description}`);
+    console.log(`Status: ${task.status}`);
+    console.log(`Priority: ${task.priority || 'medium'}`);
+    console.log(`Created: ${task.createdAt}`);
+    console.log(`Updated: ${task.updatedAt}`);
   });
 }
 
@@ -127,9 +133,12 @@ export function sortByPriority(order = 'desc') {
   }
 
   sorted.forEach(task => {
-    console.log(
-      `ID: ${task.id}, Description: ${task.description}, Status: ${task.status}, Priority: ${task.priority || 'medium'}, Created: ${task.createdAt}`
-    );
+    console.log(`ID: ${task.id}`);
+    console.log(`Description: ${task.description}`);
+    console.log(`Status: ${task.status}`);
+    console.log(`Priority: ${task.priority || 'medium'}`);
+    console.log(`Created: ${task.createdAt}`);
+    console.log(`Updated: ${task.updatedAt}`);
   });
 }
 
@@ -150,8 +159,11 @@ export function sortByDate(order = 'desc') {
   }
 
   sorted.forEach(task => {
-    console.log(
-      `ID: ${task.id}, Description: ${task.description}, Status: ${task.status}, Priority: ${task.priority || 'medium'}, Created: ${task.createdAt}`
-    );
+    console.log(`ID: ${task.id}`);
+    console.log(`Description: ${task.description}`);
+    console.log(`Status: ${task.status}`);
+    console.log(`Priority: ${task.priority || 'medium'}`);
+    console.log(`Created: ${task.createdAt}`);
+    console.log(`Updated: ${task.updatedAt}`);
   });
 }

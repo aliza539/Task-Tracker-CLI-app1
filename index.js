@@ -40,27 +40,32 @@ switch (command) {
     listTasks(args[0]);
     break;
 
-  case 'search': {
-    // usage: search priority <low|medium|high>
-    // or:   search date <YYYY-MM-DD>
-    const sub = args[0];
-    if (sub === 'priority') {
-      const value = args[1];
-      if (!value) return console.log('Specify a priority: low, medium, or high');
-      searchTasks({ priority: value });
-      return;
-    }
+ case 'search': {
+  const sub = args[0];
 
-    if (sub === 'date') {
-      const value = args[1];
-      if (!value) return console.log('Specify a date in YYYY-MM-DD');
-      searchTasks({ date: value });
-      return;
+  if (sub === 'priority') {
+    const value = args[1];
+    if (!value) {
+      console.log('Specify a priority: low, medium, or high');
+      break;
     }
-
-    console.log('Search command invalid. Use `search priority <value>` or `search date <YYYY-MM-DD>`');
+    searchTasks({ priority: value });
     break;
   }
+
+  if (sub === 'date') {
+    const value = args[1];
+    if (!value) {
+      console.log('Specify a date in YYYY-MM-DD');
+      break;
+    }
+    searchTasks({ date: value });
+    break;
+  }
+
+  console.log('Search command invalid. Use `search priority <value>` or `search date <YYYY-MM-DD>`');
+  break;
+}
 
   case 'sort': {
     // usage: sort priority|date [asc|desc]
@@ -83,18 +88,18 @@ switch (command) {
   case 'stats':{
     const tasks = loadTasks();
     const total = tasks.length;
-    const completed = tasks.filter(t => t.status === 'completed').length;
+    const completed = tasks.filter(t => t.status === 'done').length;
     const pending = tasks.filter(t => t.status === 'to-do').length;
     console.log(`Total tasks: ${total}`);
     console.log(`Completed: ${completed}`);
     console.log(`Pending: ${pending}`);
-    const any = tasks.some(t => t.status === 'completed');
+    const any = tasks.some(t => t.status === 'done');
     if (any) {
       console.log('Any task is completed: true');
     } else {
       console.log('Any task is completed: false');
     }
-    const all = tasks.every(t => t.status === 'completed');
+    const all = tasks.every(t => t.status === 'done');
     if (all) {
       console.log('All tasks are completed: true');
     } else {
