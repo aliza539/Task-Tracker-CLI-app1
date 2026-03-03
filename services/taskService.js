@@ -1,7 +1,7 @@
 import { loadTasks, saveTasks } from '../utils/files.js';
-import { getCurrentTimestamp } from '../helpers/date.js';
+import { getCurrentTimestamp, isoToDate } from '../helpers/date.js';
 
-export function addTask(description) {
+export function addTask(description, priority = 'medium') {
   const tasks = loadTasks();
   const newId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
 
@@ -9,6 +9,7 @@ export function addTask(description) {
     id: newId,
     description,
     status: 'to-do',
+    priority,
     createdAt: getCurrentTimestamp(),
     updatedAt: getCurrentTimestamp(),
   };
@@ -76,7 +77,81 @@ export function listTasks(filter) {
 
   tasksToDisplay.forEach(task => {
     console.log(
-      `ID: ${task.id}, Description: ${task.description}, Status: ${task.status}, Created: ${task.createdAt}, Updated: ${task.updatedAt}`
+      `ID: ${task.id}, Description: ${task.description}, Status: ${task.status}, Priority: ${task.priority || 'medium'}, Created: ${task.createdAt}, Updated: ${task.updatedAt}`
+    );
+  });
+}
+
+export function searchTasks({ priority, date }) {
+  const tasks = loadTasks();
+  let results = tasks;
+
+  if (priority) {
+    results = results.filter(t => (t.priority || 'medium').toLowerCase() === priority.toLowerCase());
+  }
+
+  if (date) {
+    // date expected in YYYY-MM-DD format; compare against createdAt date
+    results = results.filter(t => isoToDate(t.createdAt) === date);
+  }
+
+  if (results.length === 0) {
+    console.log('No tasks found.');
+    return;
+  }
+
+  results.forEach(task => {
+    console.log(
+      `ID: ${task.id}, Description: ${task.description}, Status: ${task.status}, Priority: ${task.priority || 'medium'}, Created: ${task.createdAt}, Updated: ${task.updatedAt}`
+    );
+  });
+}
+
+export function sortByPriority(order = 'desc') {
+  const tasks = loadTasks();
+  const priorityOrder = ['low', 'medium', 'high'];
+
+  const sorted = tasks.slice().sort((a, b) => {
+    const pa = (a.priority || 'medium').toLowerCase();
+    const pb = (b.priority || 'medium').toLowerCase();
+    const ia = priorityOrder.indexOf(pa);
+    const ib = priorityOrder.indexOf(pb);
+    return ia - ib;
+  });
+
+  if (order === 'desc') sorted.reverse();
+
+  if (sorted.length === 0) {
+    console.log('No tasks to sort.');
+    return;
+  }
+
+  sorted.forEach(task => {
+    console.log(
+      `ID: ${task.id}, Description: ${task.description}, Status: ${task.status}, Priority: ${task.priority || 'medium'}, Created: ${task.createdAt}`
+    );
+  });
+}
+
+export function sortByDate(order = 'desc') {
+  const tasks = loadTasks();
+
+  const sorted = tasks.slice().sort((a, b) => {
+    const ta = new Date(a.createdAt).getTime();
+    const tb = new Date(b.createdAt).getTime();
+    return ta - tb;
+  });
+
+  if (order === 'desc') sorted.reverse();
+
+  if (sorted.length === 0) {
+    console.log('No tasks to sort.');
+    return;
+  }
+
+  sorted.forEach(task => {
+    console.log(
+      `ID: ${task.id}, Description: ${task.description}, Status: ${task.status}, Priority: ${task.priority || 'medium'}, Created: ${task.createdAt}`
     );
   });
 }
