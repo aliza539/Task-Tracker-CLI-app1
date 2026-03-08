@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "Task-Tracker-CLI-app1 ",
-  "type":"module",
+  "type": "module",
   "bin": {
-    "task-tracker":"./index.js"
+    "task-tracker": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
